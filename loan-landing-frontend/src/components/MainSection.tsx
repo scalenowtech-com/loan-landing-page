@@ -62,7 +62,7 @@ export default function MainSection() {
 
   return (
     <section className="bg-[url('/bg.jpg')] bg-cover bg-center py-20">
-      <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between px-6">
+      <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-20 px-6">
         {/* Left Content */}
         <div className="max-w-xl pl-6 lg:pl-12 text-white">
           <p className="text-red-400 font-semibold underline">
@@ -70,7 +70,7 @@ export default function MainSection() {
           </p>
           <h1 className="text-5xl font-bold leading-tight mt-2">
             Get Emergency Loan <br /> in{" "}
-            <span className="text-red-500">30 Minutes</span>
+            <span className="text-red-400">30 Minutes</span>
           </h1>
           <p className="mt-4 text-lg text-gray-200">
             Quick, secure, and hassle-free loans for all your urgent financial
@@ -84,7 +84,7 @@ export default function MainSection() {
               Apply Now – Get ₹50,000
             </a>
             <a
-              href="tel:9266328731"
+              href="tel:6289867688"
               className="border border-white px-6 py-3 rounded-full"
             >
               Call: 6289867688
@@ -95,7 +95,7 @@ export default function MainSection() {
         {/* Right Form */}
         <div
           id="loan-form"
-          className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-sm mt-12 lg:mt-0 lg:ml-20"
+          className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-sm mt-12 lg:mt-0 lg:ml-24"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
             <h2 className="text-2xl font-bold text-center">Get Instant Loan</h2>
