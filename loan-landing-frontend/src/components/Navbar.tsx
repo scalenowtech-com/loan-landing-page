@@ -2,9 +2,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link as ScrollLink } from "react-scroll";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleTrackLoan = () => {
+    toast.success("📑 Loan details opened!");
+    setMenuOpen(false); // close menu if mobile
+  };
 
   return (
     <nav className="bg-white shadow-md w-full z-50">
@@ -17,21 +25,36 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <div className="hidden md:flex space-x-8">
-          <Link href="/about" className="text-gray-700 hover:text-red-600 font-medium">
+          <ScrollLink
+            to="about"
+            smooth={true}
+            duration={500}
+            offset={-70}
+            className="cursor-pointer text-gray-700 hover:text-red-600 font-medium"
+          >
             About
-          </Link>
+          </ScrollLink>
+
           <Link href="/services" className="text-gray-700 hover:text-red-600 font-medium">
             Services
           </Link>
-          <Link href="/contact" className="text-gray-700 hover:text-red-600 font-medium">
+
+          <ScrollLink
+            to="contact"
+            smooth={true}
+            duration={500}
+            offset={-70}
+            className="cursor-pointer text-gray-700 hover:text-red-600 font-medium"
+          >
             Contact
-          </Link>
-          <Link
-            href="/track-loan"
+          </ScrollLink>
+
+          <button
+            onClick={handleTrackLoan}
             className="bg-red-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition"
           >
             Track Loan
-          </Link>
+          </button>
         </div>
 
         {/* Mobile Hamburger */}
@@ -50,21 +73,42 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white shadow-lg px-6 py-4 space-y-4">
-          <Link href="/about" className="block text-gray-700 hover:text-red-600 font-medium">
+          <ScrollLink
+            to="about"
+            smooth={true}
+            duration={500}
+            offset={-70}
+            onClick={() => setMenuOpen(false)}
+            className="block cursor-pointer text-gray-700 hover:text-red-600 font-medium"
+          >
             About
-          </Link>
-          <Link href="/services" className="block text-gray-700 hover:text-red-600 font-medium">
+          </ScrollLink>
+
+          <Link
+            href="/services"
+            className="block text-gray-700 hover:text-red-600 font-medium"
+            onClick={() => setMenuOpen(false)}
+          >
             Services
           </Link>
-          <Link href="/contact" className="block text-gray-700 hover:text-red-600 font-medium">
+
+          <ScrollLink
+            to="contact"
+            smooth={true}
+            duration={500}
+            offset={-70}
+            onClick={() => setMenuOpen(false)}
+            className="block cursor-pointer text-gray-700 hover:text-red-600 font-medium"
+          >
             Contact
-          </Link>
-          <Link
-            href="/track-loan"
-            className="block bg-red-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition"
+          </ScrollLink>
+
+          <button
+            onClick={handleTrackLoan}
+            className="block w-full bg-red-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition"
           >
             Track Loan
-          </Link>
+          </button>
         </div>
       )}
     </nav>

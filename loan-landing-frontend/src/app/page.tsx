@@ -10,10 +10,16 @@ export default function Home() {
     <>
       <Navbar />
       <main className="min-h-screen bg-gray-50">
-        <MainSection />
-        <About />
+        <section id="hero">
+          <MainSection />
+        </section>
+        <section id="about">
+          <About />
+        </section>
       </main>
-      <Footer />
+      <footer id="contact">
+        <Footer />
+      </footer>
     </>
   );
 }
