@@ -11,6 +11,7 @@ import {
   MapPin,
   IndianRupee,
   BarChart,
+  Wallet
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -20,9 +21,11 @@ export default function MainSection() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    salary: "",
     city: "",
     loanAmount: "",
     cibil: "",
+    
   });
 
   // handleChange for all inputs/selects
@@ -49,6 +52,7 @@ export default function MainSection() {
         setFormData({
           name: "",
           phone: "",
+          salary: "",
           city: "",
           loanAmount: "",
           cibil: "",
@@ -162,6 +166,37 @@ export default function MainSection() {
                 </p>
               </div>
             </div>
+{/* Salary */}
+<div>
+  <label className="block text-sm font-medium mb-1">
+    Monthly Salary (₹) <span className="text-red-500">*</span>
+  </label>
+  <div className="relative">
+    <Wallet className="absolute left-3 top-2/5 -translate-y-1/2 text-gray-400 w-5 h-5" />
+    <input
+      type="number"
+      name="salary"
+      placeholder=" Enter your salary"
+      min={35000}
+      className="w-full border rounded-lg p-3 pl-10 outline-none"
+      value={formData.salary}
+      onChange={(e) => {
+        setFormData({ ...formData, salary: e.target.value });
+      }}
+      onBlur={(e) => {
+        if (Number(e.target.value) < 35000 && e.target.value !== "") {
+          alert("Salary must be at least ₹35,000");
+          setFormData({ ...formData, salary: "" });
+        }
+      }}
+      required
+    />
+    <p className="text-xs text-gray-500 mt-1">
+      Minimum salary should be ₹35,000
+    </p>
+  </div>
+</div>
+
 
             {/* City */}
             <div>
