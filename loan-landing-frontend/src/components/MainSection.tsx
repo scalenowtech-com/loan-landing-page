@@ -350,7 +350,7 @@ export default function MainSection() {
               By proceeding, you agree to our{" "}
               <button
                 type="button"
-                className="text-red-600 underline hover:text-red-700"
+                className="text-red-600 hover:text-red-700 hover:underline"
                 onClick={() => toast.info("📄 Terms & Conditions will open here")}
               >
                 Terms & Conditions
@@ -358,7 +358,7 @@ export default function MainSection() {
               and{" "}
               <button
                 type="button"
-                className="text-red-600 underline hover:text-red-700"
+                className="text-red-600 hover:text-red-700 hover:underline"
                 onClick={() => toast.info("🔒 Privacy Policy will open here")}
               >
                 Privacy Policy
@@ -375,7 +375,7 @@ export default function MainSection() {
                   By proceeding, you agree to our{" "}
                   <button
                     type="button"
-                    className="text-red-600 underline hover:text-red-700"
+                    className="text-red-600  hover:text-red-700 hover:underline"
                     onClick={() => toast.info("🔒 Privacy Policy content here")}
                   >
                     Privacy Policy
@@ -383,7 +383,7 @@ export default function MainSection() {
                   and{" "}
                   <button
                     type="button"
-                    className="text-red-600 underline hover:text-red-700"
+                    className="text-red-600 hover:text-red-700 hover:underline"
                     onClick={() => toast.info("📄 Terms & Conditions content here")}
                   >
                     Terms & Conditions
