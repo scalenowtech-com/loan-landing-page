@@ -348,21 +348,20 @@ export default function MainSection() {
 
             <p className="text-xs text-gray-500 text-center mt-2">
               By proceeding, you agree to our{" "}
-              <button
+                <a
+                  href="/terms-and-conditions"
                 type="button"
                 className="text-red-600 hover:text-red-700 hover:underline"
-                onClick={() => toast.info("📄 Terms & Conditions will open here")}
               >
                 Terms & Conditions
-              </button>{" "}
+              </a>{" "}
               and{" "}
-              <button
+              <a
+                  href="/privacy-policy"
                 type="button"
-                className="text-red-600 hover:text-red-700 hover:underline"
-                onClick={() => toast.info("🔒 Privacy Policy will open here")}
-              >
+                className="text-red-600 hover:text-red-700 hover:underline">
                 Privacy Policy
-              </button>
+              </a>
             </p>
           </form>
 
@@ -373,21 +372,20 @@ export default function MainSection() {
                 <h2 className="text-xl font-semibold mb-4 text-center">Confirmation</h2>
                 <p className="text-gray-600 mb-4 text-sm text-center">
                   By proceeding, you agree to our{" "}
-                  <button
-                    type="button"
-                    className="text-red-600  hover:text-red-700 hover:underline"
-                    onClick={() => toast.info("🔒 Privacy Policy content here")}
-                  >
-                    Privacy Policy
-                  </button>{" "}
-                  and{" "}
-                  <button
-                    type="button"
-                    className="text-red-600 hover:text-red-700 hover:underline"
-                    onClick={() => toast.info("📄 Terms & Conditions content here")}
-                  >
-                    Terms & Conditions
-                  </button>.
+                  <a
+                  href="/terms-and-conditions"
+                type="button"
+                className="text-red-600 hover:text-red-700 hover:underline"
+              >
+                Terms & Conditions
+              </a>{" "}
+              and{" "}
+              <a
+                  href="/privacy-policy"
+                type="button"
+                className="text-red-600 hover:text-red-700 hover:underline">
+                Privacy Policy
+              </a>.
                 </p>
                 <div className="flex items-center mb-4">
                   <input
