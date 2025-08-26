@@ -1,4 +1,5 @@
 "use client";
+import { Phone } from "lucide-react"; 
 
 export default function Footer() {
   return (
@@ -12,12 +13,13 @@ export default function Footer() {
               Your trusted partner for instant financial solutions. Quick,
               secure, and hassle-free loans.
             </p>
-            <p className="mt-3 text-sm text-gray-400">
-              📞 Call:{" "}
-              <a href="tel:9266328731" className="hover:text-white">
-                9266328731
-              </a>
-            </p>
+            <p className="mt-3 text-sm text-gray-400 flex items-center">
+  <Phone className="w-4 h-4 text-gray-500 mr-2" /> 
+  Call:{" "}
+  <a href="tel:9266328731" className="hover:text-white ml-1">
+    9266328731
+  </a>
+</p>
           </div>
 
           {/* Quick Links */}
