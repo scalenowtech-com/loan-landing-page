@@ -38,7 +38,7 @@ export default function ThankYouPage() {
             rel="noopener noreferrer"
             className="text-red-600 font-medium hover:underline"
           >
-            View Reference
+            View Reference - https://readdy.link/preview/e923117a-e2ad-4d0d-8ec0-b704bf0e3687/1945895
           </a>
         </div>
       </div>
