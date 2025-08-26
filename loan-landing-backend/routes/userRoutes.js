@@ -21,6 +21,7 @@ router.post("/", async (req, res) => {
     const newUser = new User({
       name: name.trim(),
       phone: phone.trim(),
+      salary: salary.trim(),
       city: city.trim(),
       loanAmount: loanAmount.toString().trim(),
       cibil: cibil ? cibil.toString().trim() : undefined,
