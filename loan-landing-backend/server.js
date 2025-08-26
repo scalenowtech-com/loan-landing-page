@@ -7,25 +7,36 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 const app = express();
 
-// Middleware
+// ✅ Load allowed origins from .env
+const allowedOrigins = process.env.FRONTEND_URLS.split(",");
+
+// ✅ Middleware
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // ✅ Only allow your deployed frontend
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow Postman, curl, etc.
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 app.use(express.json());
 
-// DB Connection
+// ✅ DB Connection
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Error:", err));
 
-
-// Routes
+// ✅ Routes
 app.use("/api/users", userRoutes);
 
+// ✅ Server Start
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
