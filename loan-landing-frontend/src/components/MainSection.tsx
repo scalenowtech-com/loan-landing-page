@@ -151,7 +151,7 @@ export default function MainSection() {
             {/* Phone */}
             <div>
               <label className="block text-sm font-medium mb-1">
-                Aadhar Registered Phone Number{" "}
+                Mobile Number{" "}
                 <span className="text-red-500">*</span>
               </label>
               <div className="relative">
