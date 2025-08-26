@@ -7,8 +7,10 @@ import userRoutes from "./routes/userRoutes.js";
 dotenv.config();
 const app = express();
 
-// ✅ Load allowed origins from .env
-const allowedOrigins = process.env.FRONTEND_URLS.split(",");
+const allowedOrigins = process.env.FRONTEND_URLS
+  ? process.env.FRONTEND_URLS.split(",")
+  : ["http://localhost:3000"];
+
 
 // ✅ Middleware
 app.use(
