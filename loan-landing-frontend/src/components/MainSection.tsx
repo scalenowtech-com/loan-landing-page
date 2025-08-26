@@ -174,6 +174,7 @@ export default function MainSection() {
                   <option>Hyderabad</option>
                   <option>Kolkata</option>
                   <option>Mumbai</option>
+                  <option>New Delhi (HO)</option>
                   <option>Pune</option>
                 </select>
               </div>
