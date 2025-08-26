@@ -28,6 +28,9 @@ export default function MainSection() {
     
   });
 
+  
+  const [loading, setLoading] = useState(false);
+
   // handleChange for all inputs/selects
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -42,6 +45,7 @@ export default function MainSection() {
   // handleSubmit for form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const API_BASE_URL =
         process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -64,6 +68,8 @@ export default function MainSection() {
     } catch (error) {
       console.error("❌ Axios Error:", error);
       toast.error("⚠ Something went wrong!");
+      } finally {
+    setLoading(false);
     }
   };
 
@@ -281,11 +287,16 @@ export default function MainSection() {
 
             {/* Submit */}
             <button
-              type="submit"
-              className="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700"
-            >
-              Get Instant Approval
-            </button>
+  type="submit"
+  disabled={loading}
+  className={`w-full py-3 rounded-lg font-semibold transition ${
+    loading
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-red-600 text-white hover:bg-red-700"
+  }`}
+>
+  {loading ? "Please Wait..." : "Get Instant Approval"}
+</button>
 
             <p className="text-xs text-gray-500 text-center mt-2">
               By proceeding, you agree to our{" "}
@@ -293,6 +304,15 @@ export default function MainSection() {
               <span className="underline">Privacy Policy</span>
             </p>
           </form>
+
+          {loading && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+      <div className="animate-spin h-10 w-10 border-4 border-red-600 border-t-transparent rounded-full mb-3"></div>
+      <p className="text-gray-700 font-medium">Submitting your application...</p>
+    </div>
+  </div>
+)}
         </div>
       </div>
 
