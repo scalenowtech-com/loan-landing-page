@@ -6,22 +6,22 @@ const router = express.Router();
 // Save form data
 router.post("/", async (req, res) => {
   try {
-    console.log("📩 Incoming request body:", req.body); // 🔍 Debug log
+    console.log("📩 Incoming request body:", req.body);
 
-    const { name, phone, city, loanAmount, cibil } = req.body;
+    const { name, phone, city, loanAmount, cibil, salary } = req.body;
 
     // Basic validation
-    if (!name || !phone || !city || !loanAmount) {
-      console.warn("⚠️ Missing required fields:", { name, phone, city, loanAmount });
+    if (!name || !phone || !city || !loanAmount || !salary) {
+      console.warn("⚠️ Missing required fields:", { name, phone, city, loanAmount, salary });
       return res.status(400).json({
-        message: "Name, Phone, City, and Loan Amount are required",
+        message: "Name, Phone, City, Loan Amount, and Salary are required",
       });
     }
 
     const newUser = new User({
       name: name.trim(),
       phone: phone.trim(),
-      salary: salary.trim(),
+      salary: Number(salary), // ✅ Fix salary
       city: city.trim(),
       loanAmount: loanAmount.toString().trim(),
       cibil: cibil ? cibil.toString().trim() : undefined,
