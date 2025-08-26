@@ -1,4 +1,5 @@
-// src/app/thank-you/page.tsx
+import Link from "next/link";
+
 export default function ThankYouPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-red-50 text-gray-800">
@@ -6,12 +7,12 @@ export default function ThankYouPage() {
       <p className="text-lg text-gray-700 mb-6">
         Your loan application has been received. We will contact you shortly.
       </p>
-      <a
+      <Link
         href="/"
         className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition"
       >
         Back to Home
-      </a>
+      </Link>
     </div>
   );
 }
