@@ -22,7 +22,9 @@ export default function MainSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/users", formData);
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const res = await axios.post(`${API_BASE_URL}/api/users`, formData);
       if (res.status === 201) {
         toast.success("✅ Loan request submitted successfully!");
         setFormData({ name: "", phone: "", city: "", loanAmount: "", cibil: "" });
