@@ -105,7 +105,7 @@ export default function LoanLanding() {
           </div>
           <div>
             <h3 className="text-2xl font-bold">8+</h3>
-            <p className="text-base text-gray-300">Years Experience</p>
+            <p className="text-base text-gray-300">Cities Covered</p>
           </div>
           <div>
             <h3 className="text-2xl font-bold">99.8%</h3>

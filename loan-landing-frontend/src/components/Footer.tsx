@@ -19,8 +19,8 @@ export default function Footer() {
             </p>
             <p className="mt-3 text-sm text-gray-400">
               📞 Call:{" "}
-              <a href="tel:6289867688" className="hover:text-white">
-                6289867688
+              <a href="tel:9266328731" className="hover:text-white">
+                9266328731
               </a>
             </p>
           </div>

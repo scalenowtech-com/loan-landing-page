@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-
 export default function MainSection() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -25,11 +24,11 @@ export default function MainSection() {
     city: "",
     loanAmount: "",
     cibil: "",
-    
   });
 
-  
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [agree, setAgree] = useState(false);
 
   // handleChange for all inputs/selects
   function handleChange(
@@ -42,10 +41,40 @@ export default function MainSection() {
     }));
   }
 
-  // handleSubmit for form
+  // Handle form submission - show modal instead of direct API call
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.name || !formData.phone || !formData.salary || !formData.city || !formData.loanAmount) {
+      toast.error("❌ Please fill in all required fields.");
+      return;
+    }
+
+    // Validate phone number
+    if (formData.phone.length !== 10 || !/^\d{10}$/.test(formData.phone)) {
+      toast.error("❌ Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    // Validate salary
+    if (Number(formData.salary) < 35000) {
+      toast.error("❌ Minimum salary should be ₹35,000.");
+      return;
+    }
+
+    setShowModal(true);
+  };
+
+  // Handle final submission after user agrees to terms
+  const handleFinalSubmit = async () => {
+    if (!agree) {
+      toast.error("❌ You must agree to the terms before proceeding.");
+      return;
+    }
+    
     setLoading(true);
+
     try {
       const API_BASE_URL =
         process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -53,6 +82,7 @@ export default function MainSection() {
       const res = await axios.post(`${API_BASE_URL}/api/users`, formData);
 
       if (res.status === 201) {
+        toast.success("✅ Loan application submitted successfully!");
         setFormData({
           name: "",
           phone: "",
@@ -61,16 +91,31 @@ export default function MainSection() {
           loanAmount: "",
           cibil: "",
         });
-        router.push("/thank-you");
+        setTimeout(() => {
+          router.push("/thank-you");
+        }, 2000);
       } else {
         toast.error("❌ Failed to submit loan request.");
       }
     } catch (error) {
       console.error("❌ Axios Error:", error);
-      toast.error("⚠ Something went wrong!");
-      } finally {
-    setLoading(false);
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || "Something went wrong!";
+        toast.error(`⚠ ${errorMessage}`);
+      } else {
+        toast.error("⚠ Network error occurred!");
+      }
+    } finally {
+      setLoading(false);
+      setShowModal(false);
+      setAgree(false);
     }
+  };
+
+  // Handle modal close
+  const handleModalClose = () => {
+    setShowModal(false);
+    setAgree(false);
   };
 
   return (
@@ -90,8 +135,7 @@ export default function MainSection() {
             needs. No lengthy paperwork, instant approval.
           </p>
           <div className="mt-6 flex space-x-4">
-            <a
-              href="#loan-form"
+            <button
               onClick={(e) => {
                 e.preventDefault();
                 toast.success("✅ Redirecting to Loan Form...");
@@ -100,15 +144,15 @@ export default function MainSection() {
                   formSection?.scrollIntoView({ behavior: "smooth" });
                 }, 800);
               }}
-              className="bg-red-600 px-6 py-3 rounded-full text-white font-semibold hover:bg-red-700 cursor-pointer"
+              className="bg-red-600 px-6 py-3 rounded-full text-white font-semibold hover:bg-red-700 transition-colors cursor-pointer"
             >
-              Apply Now – Get ₹50,000
-            </a>
+              Apply Now - Get ₹50,000
+            </button>
             <a
-              href="tel:6289867688"
-              className="border border-white px-6 py-3 rounded-full"
+              href="tel:9266328731"
+              className="border border-white px-6 py-3 rounded-full hover:bg-white hover:text-gray-800 transition-colors"
             >
-              Call: 6289867688
+              Call: 9266328731
             </a>
           </div>
         </div>
@@ -139,11 +183,13 @@ export default function MainSection() {
                 <input
                   type="text"
                   name="name"
-                  placeholder="     Enter your full name"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none"
+                  placeholder="Enter your full name"
+                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  minLength={2}
+                  maxLength={50}
                 />
               </div>
             </div>
@@ -151,58 +197,60 @@ export default function MainSection() {
             {/* Phone */}
             <div>
               <label className="block text-sm font-medium mb-1">
-                Mobile Number{" "}
-                <span className="text-red-500">*</span>
+                Mobile Number <span className="text-red-500">*</span>
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-2/5 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="tel"
                   name="phone"
                   pattern="[0-9]{10}"
                   maxLength={10}
-                  placeholder="      10-digit mobile number"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none"
+                  placeholder="10-digit mobile number"
+                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   value={formData.phone}
                   onChange={handleChange}
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Must be registered with Aadhar
+                  Must be registered with Aadhaar
                 </p>
               </div>
             </div>
-{/* Salary */}
-<div>
-  <label className="block text-sm font-medium mb-1">
-    Monthly Salary (₹) <span className="text-red-500">*</span>
-  </label>
-  <div className="relative">
-    <Wallet className="absolute left-3 top-2/5 -translate-y-1/2 text-gray-400 w-5 h-5" />
-    <input
-      type="number"
-      name="salary"
-      placeholder=" Enter your salary"
-      min={35000}
-      className="w-full border rounded-lg p-3 pl-10 outline-none"
-      value={formData.salary}
-      onChange={(e) => {
-        setFormData({ ...formData, salary: e.target.value });
-      }}
-      onBlur={(e) => {
-        if (Number(e.target.value) < 35000 && e.target.value !== "") {
-          alert("Salary must be at least ₹35,000");
-          setFormData({ ...formData, salary: "" });
-        }
-      }}
-      required
-    />
-    <p className="text-xs text-gray-500 mt-1">
-      Minimum salary should be ₹35,000
-    </p>
-  </div>
-</div>
 
+            {/* Salary */}
+            <div>
+              <label className="block text-sm font-medium mb-1">
+                Monthly Salary (₹) <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="number"
+                  name="salary"
+                  placeholder="Enter your salary"
+                  min={35000}
+                  max={10000000}
+                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  value={formData.salary}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setFormData({ ...formData, salary: value });
+                  }}
+                  onBlur={(e) => {
+                    const value = Number(e.target.value);
+                    if (value > 0 && value < 35000) {
+                      toast.error("❌ Salary must be at least ₹35,000");
+                      setFormData({ ...formData, salary: "" });
+                    }
+                  }}
+                  required
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  Minimum salary should be ₹35,000
+                </p>
+              </div>
+            </div>
 
             {/* City */}
             <div>
@@ -213,21 +261,21 @@ export default function MainSection() {
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                 <select
                   name="city"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none"
+                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   value={formData.city}
                   onChange={handleChange}
                   required
                 >
                   <option value="">Select your city</option>
-                  <option>Ahmedabad</option>
-                  <option>Bangalore</option>
-                  <option>Chennai</option>
-                  <option>Delhi/NCR</option>
-                  <option>Hyderabad</option>
-                  <option>Kolkata</option>
-                  <option>Mumbai</option>
-                  <option>New Delhi (HO)</option>
-                  <option>Pune</option>
+                  <option value="Ahmedabad">Ahmedabad</option>
+                  <option value="Bangalore">Bangalore</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Delhi/NCR">Delhi/NCR</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="New Delhi (HO)">New Delhi (HO)</option>
+                  <option value="Pune">Pune</option>
                 </select>
               </div>
             </div>
@@ -241,22 +289,22 @@ export default function MainSection() {
                 <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                 <select
                   name="loanAmount"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none"
+                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   value={formData.loanAmount}
                   onChange={handleChange}
                   required
                 >
                   <option value="">Select loan amount</option>
-                  <option>₹5,000</option>
-                  <option>₹10,000</option>
-                  <option>₹15,000</option>
-                  <option>₹20,000</option>
-                  <option>₹25,000</option>
-                  <option>₹30,000</option>
-                  <option>₹40,000</option>
-                  <option>₹50,000</option>
-                  <option>₹75,000</option>
-                  <option>₹1,00,000</option>
+                  <option value="₹5,000">₹5,000</option>
+                  <option value="₹10,000">₹10,000</option>
+                  <option value="₹15,000">₹15,000</option>
+                  <option value="₹20,000">₹20,000</option>
+                  <option value="₹25,000">₹25,000</option>
+                  <option value="₹30,000">₹30,000</option>
+                  <option value="₹40,000">₹40,000</option>
+                  <option value="₹50,000">₹50,000</option>
+                  <option value="₹75,000">₹75,000</option>
+                  <option value="₹1,00,000">₹1,00,000</option>
                 </select>
               </div>
             </div>
@@ -270,54 +318,136 @@ export default function MainSection() {
                 <BarChart className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                 <select
                   name="cibil"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none"
+                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   value={formData.cibil}
                   onChange={handleChange}
                 >
                   <option value="">Select CIBIL Score range</option>
-                  <option>750+ (Excellent)</option>
-                  <option>700-749 (Good)</option>
-                  <option>650-699 (Fair)</option>
-                  <option>600-649 (Poor)</option>
-                  <option>Below 600</option>
-                  <option>Not Sure</option>
+                  <option value="750+ (Excellent)">750+ (Excellent)</option>
+                  <option value="700-749 (Good)">700-749 (Good)</option>
+                  <option value="650-699 (Fair)">650-699 (Fair)</option>
+                  <option value="600-649 (Poor)">600-649 (Poor)</option>
+                  <option value="Below 600">Below 600</option>
+                  <option value="Not Sure">Not Sure</option>
                 </select>
               </div>
             </div>
 
-            {/* Submit */}
+            {/* Submit Button */}
             <button
-  type="submit"
-  disabled={loading}
-  className={`w-full py-3 rounded-lg font-semibold transition ${
-    loading
-      ? "bg-gray-400 cursor-not-allowed"
-      : "bg-red-600 text-white hover:bg-red-700"
-  }`}
->
-  {loading ? "Please Wait..." : "Get Instant Approval"}
-</button>
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3 rounded-lg font-semibold transition-colors ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-red-600 text-white hover:bg-red-700"
+              }`}
+            >
+              {loading ? "Please Wait..." : "Get Instant Approval"}
+            </button>
 
             <p className="text-xs text-gray-500 text-center mt-2">
               By proceeding, you agree to our{" "}
-              <span className="underline">Terms & Conditions</span> and{" "}
-              <span className="underline">Privacy Policy</span>
+              <button
+                type="button"
+                className="text-red-600 underline hover:text-red-700"
+                onClick={() => toast.info("📄 Terms & Conditions will open here")}
+              >
+                Terms & Conditions
+              </button>{" "}
+              and{" "}
+              <button
+                type="button"
+                className="text-red-600 underline hover:text-red-700"
+                onClick={() => toast.info("🔒 Privacy Policy will open here")}
+              >
+                Privacy Policy
+              </button>
             </p>
           </form>
 
+          {/* Confirmation Modal */}
+          {showModal && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+              <div className="bg-white p-6 rounded-lg w-96 max-w-[90vw] shadow-lg">
+                <h2 className="text-xl font-semibold mb-4 text-center">Confirmation</h2>
+                <p className="text-gray-600 mb-4 text-sm text-center">
+                  By proceeding, you agree to our{" "}
+                  <button
+                    type="button"
+                    className="text-red-600 underline hover:text-red-700"
+                    onClick={() => toast.info("🔒 Privacy Policy content here")}
+                  >
+                    Privacy Policy
+                  </button>{" "}
+                  and{" "}
+                  <button
+                    type="button"
+                    className="text-red-600 underline hover:text-red-700"
+                    onClick={() => toast.info("📄 Terms & Conditions content here")}
+                  >
+                    Terms & Conditions
+                  </button>.
+                </p>
+                <div className="flex items-center mb-4">
+                  <input
+                    type="checkbox"
+                    id="agree-checkbox"
+                    checked={agree}
+                    onChange={() => setAgree(!agree)}
+                    className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
+                  />
+                  <label htmlFor="agree-checkbox" className="ml-2 text-sm text-gray-700 cursor-pointer">
+                    I agree to the above terms
+                  </label>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <button
+                    onClick={handleModalClose}
+                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleFinalSubmit}
+                    disabled={!agree || loading}
+                    className={`px-4 py-2 rounded text-white transition-colors ${
+                      loading || !agree
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-red-600 hover:bg-red-700"
+                    }`}
+                  >
+                    {loading ? "Submitting..." : "Proceed"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Loading Spinner */}
           {loading && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-      <div className="animate-spin h-10 w-10 border-4 border-red-600 border-t-transparent rounded-full mb-3"></div>
-      <p className="text-gray-700 font-medium">Submitting your application...</p>
-    </div>
-  </div>
-)}
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+                <div className="animate-spin h-10 w-10 border-4 border-red-600 border-t-transparent rounded-full mb-3"></div>
+                <p className="text-gray-700 font-medium">Submitting your application...</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Toast */}
-      <ToastContainer position="top-right" autoClose={3000} />
+      {/* Toast Container */}
+      <ToastContainer 
+        position="top-right" 
+        autoClose={3000} 
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </section>
   );
 }
