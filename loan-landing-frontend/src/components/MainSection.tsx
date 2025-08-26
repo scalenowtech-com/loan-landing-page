@@ -12,8 +12,11 @@ import {
   IndianRupee,
   BarChart,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 
 export default function MainSection() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -43,7 +46,6 @@ export default function MainSection() {
       const res = await axios.post(`${API_BASE_URL}/api/users`, formData);
 
       if (res.status === 201) {
-        toast.success("✅ Loan request submitted successfully!");
         setFormData({
           name: "",
           phone: "",
@@ -51,6 +53,7 @@ export default function MainSection() {
           loanAmount: "",
           cibil: "",
         });
+        router.push("/thank-you");
       } else {
         toast.error("❌ Failed to submit loan request.");
       }
@@ -79,7 +82,15 @@ export default function MainSection() {
           <div className="mt-6 flex space-x-4">
             <a
               href="#loan-form"
-              className="bg-red-600 px-6 py-3 rounded-full text-white font-semibold hover:bg-red-700"
+              onClick={(e) => {
+                e.preventDefault();
+                toast.success("✅ Redirecting to Loan Form...");
+                setTimeout(() => {
+                  const formSection = document.getElementById("loan-form");
+                  formSection?.scrollIntoView({ behavior: "smooth" });
+                }, 800);
+              }}
+              className="bg-red-600 px-6 py-3 rounded-full text-white font-semibold hover:bg-red-700 cursor-pointer"
             >
               Apply Now – Get ₹50,000
             </a>
