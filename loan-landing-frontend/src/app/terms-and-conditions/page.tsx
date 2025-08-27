@@ -79,7 +79,7 @@ export default function TermsAndConditions() {
         </p>
 
 {/* Section 7 */}
-        <h2 className="text-2xl font-bold mb-6">4. Prohibited Activities</h2>
+        <h2 className="text-2xl font-bold mt-6 mb-6">7. Prohibited Activities</h2>
         <p className="mb-3 text-gray-700">
           You agree not to:
         </p>
@@ -87,7 +87,7 @@ export default function TermsAndConditions() {
           <li>Provide false or misleading information</li>
           <li>Use our services for illegal purposes</li>
           <li>Attempt to defraud or manipulate our systems</li>
-          <li>RShare your account credentials with unauthorized persons</li>
+          <li>Share your account credentials with unauthorized persons</li>
         </ul>
 
          {/* Section 8 */}
@@ -97,7 +97,7 @@ export default function TermsAndConditions() {
         </p>
 
          {/* Section 9 */}
-        <h2 className="text-2xl font-bold mb-6">9. Grievance Redressal</h2>
+        <h2 className="text-2xl font-bold mt-6 mb-6">9. Grievance Redressal</h2>
         <p className="mb-3 text-gray-700">
           We have established an effective Grievance Redressal Cell as per RBI directives. Any complaints will be addressed within 5 working days. You can reach us at:
         </p>

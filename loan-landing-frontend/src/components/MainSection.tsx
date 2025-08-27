@@ -254,7 +254,7 @@ export default function MainSection() {
     Monthly Salary (₹) <span className="text-red-500">*</span>
   </label>
   <div className="relative">
-    <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+    <Wallet className="absolute left-3 top-2/5 -translate-y-1/2 text-gray-400 w-5 h-5" />
 
     <input
       type="number"

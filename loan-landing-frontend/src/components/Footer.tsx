@@ -1,5 +1,6 @@
 "use client";
 import { Phone } from "lucide-react"; 
+import { pacifico } from "@/lib/fonts";
 
 export default function Footer() {
   return (
@@ -8,7 +9,9 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Section */}
           <div>
-            <h2 className="text-2xl font-semibold text-red-500">LoanInNeed</h2>
+            <h2 className={`text-2xl font-semibold text-red-500 ${pacifico.className}`}>
+  LoanInNeed
+</h2>
             <p className="mt-2 text-sm text-gray-400 leading-relaxed">
               Your trusted partner for instant financial solutions. Quick,
               secure, and hassle-free loans.

@@ -38,6 +38,7 @@ export default function PrivacyPolicy() {
   <li>Date of birth and age</li>
   <li>Address and residential information</li>
   <li>Phone number and email address</li>
+  <li>Government-issued ID numbers (Aadhaar, PAN, etc.)</li>
 </ul>
 
 <h2 className="text-xl font-semibold mb-2 mt-6">Financial Information:</h2>
@@ -47,7 +48,7 @@ export default function PrivacyPolicy() {
   <li>Credit score and credit history</li>
   <li>Loan amount requested and purpose</li>
 </ul>
-<h2 className="text-xl font-semibold mb-2 mt-6">Technical Information::</h2>
+<h2 className="text-xl font-semibold mb-2 mt-6">Technical Information:</h2>
 <ul className="text-gray-700 list-disc pl-6 mb-6 text-base space-y-2">
   <li>IP address and browser information</li>
   <li>Device information and operating system</li>
@@ -73,10 +74,10 @@ export default function PrivacyPolicy() {
 
 {/* Section 3 */}
         <h2 className="text-2xl font-bold mb-4">3. Information Sharing and Disclosure</h2>
-        <p className="text-gray-700 mb-3">
+        <p className="text-gray-700 mb-4">
           We may share your information in the following circumstances:
         </p>
-        <h2 className="text-xl font-semibold mb-2">With Your Consent:</h2>
+        <h2 className="text-xl font-semibold mb-4">With Your Consent:</h2>
 <p className="text-gray-700 mb-3">
           We will share your information when you have given us explicit consent to do so.
         </p>
@@ -126,13 +127,13 @@ export default function PrivacyPolicy() {
         <p className="text-gray-700 mb-3">
           You have the following rights regarding your personal information:
         </p>
-<h2 className="text-xl font-semibold mb-2 mt-6">Access and Correction:</h2>
+<h2 className="text-xl font-semibold mb-2 mt-4">Access and Correction:</h2>
 <ul className="text-gray-700 list-disc pl-6 mb-6 text-base space-y-2">
   <li>Request access to your personal information</li>
   <li>Correct inaccurate or incomplete information</li>
   <li>Update your contact preferences</li>
 </ul>
-<h2 className="text-xl font-semibold mb-2 mt-6">Communication Preferences:</h2>
+<h2 className="text-xl font-semibold mb-2 mt-4">Communication Preferences:</h2>
 <ul className="text-gray-700 list-disc pl-6 mb-6 text-base space-y-2">
   <li>Opt out of marketing communications</li>
   <li>Choose your preferred communication channels
@@ -153,7 +154,7 @@ export default function PrivacyPolicy() {
         <ul className="list-disc pl-6 mb-6 space-y-2">
           <li>Essential cookies for website functionality</li>
           <li>Analytics cookies to understand usage patterns</li>
-          <li>Marketing preferences: Until you opt out</li>
+          <li>Marketing cookies for relevant advertising</li>
           <li>Preference cookies to remember your settings</li>
         </ul>
         <p className="mb-3 text-gray-700">
