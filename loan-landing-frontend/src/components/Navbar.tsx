@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +12,7 @@ export default function Navbar() {
 
   const handleTrackLoan = () => {
     toast.success("📑 Loan details opened!");
-    setMenuOpen(false); // close menu if mobile
+    setMenuOpen(false); 
   };
 
   return (
@@ -20,7 +21,17 @@ export default function Navbar() {
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <Image src="/logo.png" alt="Loan In Need Logo" width={150} height={30} priority />
+          <Image 
+            src="/logo.png" 
+            alt="Loan In Need Logo" 
+            width={150} 
+            height={30} 
+            priority 
+            style={{ 
+              width: '150px', 
+              height: 'auto' 
+            }}
+          />
         </Link>
 
         {/* Desktop Nav Links */}
@@ -34,11 +45,11 @@ export default function Navbar() {
           >
             About
           </ScrollLink>
-
+          
           <Link href="/services" className="text-gray-700 hover:text-red-600 font-medium">
             Services
           </Link>
-
+          
           <ScrollLink
             to="contact"
             smooth={true}
@@ -48,7 +59,7 @@ export default function Navbar() {
           >
             Contact
           </ScrollLink>
-
+          
           <button
             onClick={handleTrackLoan}
             className="bg-red-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition"
@@ -83,7 +94,7 @@ export default function Navbar() {
           >
             About
           </ScrollLink>
-
+          
           <Link
             href="/services"
             className="block text-gray-700 hover:text-red-600 font-medium"
@@ -91,7 +102,7 @@ export default function Navbar() {
           >
             Services
           </Link>
-
+          
           <ScrollLink
             to="contact"
             smooth={true}
@@ -102,7 +113,7 @@ export default function Navbar() {
           >
             Contact
           </ScrollLink>
-
+          
           <button
             onClick={handleTrackLoan}
             className="block w-full bg-red-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-red-700 transition"
