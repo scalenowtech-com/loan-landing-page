@@ -1,24 +1,19 @@
 "use client";
 import { Phone } from "lucide-react"; 
-import { pacifico } from "@/lib/fonts";
-import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
-    const pathname = usePathname();
-  const isHome = pathname === "/";
   return (
     <>
       <footer className="bg-gray-900 text-gray-300 py-10">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Section */}
           <div>
-            <h2
-        className={`text-2xl font-semibold text-red-500 ${
-          isHome ? "" : pacifico.className
-        }`}
-      >
-        LoanInNeed
-      </h2>
+            {/* Logo */}
+        <Link href="/" className="flex items-center">
+          <Image src="/logo1.png" alt="Loan In Need Logo" width={90} height={18} priority />
+        </Link>
             <p className="mt-2 text-sm text-gray-400 leading-relaxed">
               Your trusted partner for instant financial solutions. Quick,
               secure, and hassle-free loans.
