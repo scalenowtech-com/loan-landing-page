@@ -120,47 +120,49 @@ export default function MainSection() {
 
   return (
     <section className="bg-[url('/bg.jpg')] bg-cover bg-center py-20">
-      <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-20 px-6">
+      <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-10 px-6">
         {/* Left Content */}
-        <div className="max-w-xl pl-6 lg:pl-12 text-white">
-          <p className="text-red-400 font-semibold underline">
-            Instant Loan Approval
+        <div className="max-w-xl pl-6 lg:pl-2 text-white mt-0 lg:mt-[-400px]">
+          <p className="text-red-400 font-semibold underline underline-offset-8">
+  Instant Loan Approval
+</p>
+          <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold lg:font-semibold leading-tight mt-2">
+  Get Emergency Loan in{" "}
+  <span className="text-red-400">30 Minutes</span>
+</h1>
+          <p className="mt-4 text-xl text-gray-200">
+            Quick, secure, and hassle-free loans for all your urgent financial needs. No lengthy paperwork, instant approval.
           </p>
-          <h1 className="text-5xl font-bold leading-tight mt-2">
-            Get Emergency Loan <br /> in{" "}
-            <span className="text-red-400">30 Minutes</span>
-          </h1>
-          <p className="mt-4 text-lg text-gray-200">
-            Quick, secure, and hassle-free loans for all your urgent financial
-            needs. No lengthy paperwork, instant approval.
-          </p>
-          <div className="mt-6 flex space-x-4">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                toast.success("✅ Redirecting to Loan Form...");
-                setTimeout(() => {
-                  const formSection = document.getElementById("loan-form");
-                  formSection?.scrollIntoView({ behavior: "smooth" });
-                }, 800);
-              }}
-              className="bg-red-600 px-6 py-3 rounded-full text-white font-semibold hover:bg-red-700 transition-colors cursor-pointer"
-            >
-              Apply Now - Get ₹50,000
-            </button>
-            <a
-              href="tel:9266328731"
-              className="border border-white px-6 py-3 rounded-full hover:bg-white hover:text-gray-800 transition-colors"
-            >
-              Call: 9266328731
-            </a>
-          </div>
+          <div className="mt-6 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+  <button
+    onClick={(e) => {
+      e.preventDefault();
+      toast.success("✅ Redirecting to Loan Form...");
+      setTimeout(() => {
+        const formSection = document.getElementById("loan-form");
+        formSection?.scrollIntoView({ behavior: "smooth" });
+      }, 800);
+    }}
+    className="text-lg bg-red-600 px-8 py-3 rounded-full text-white font-semibold hover:bg-red-700 transition-colors cursor-pointer"
+  >
+    Apply Now - Get ₹50,000
+  </button>
+ <a
+  href="tel:9266328731"
+  className="text-lg border border-white px-8 py-3 rounded-full hover:bg-white hover:text-gray-800 transition-colors text-center flex items-center justify-center gap-2"
+>
+  <Phone className="w-5 h-5" />
+  Call: 9266328731
+</a>
+
+</div>
+
         </div>
 
         {/* Right Form */}
         <div
           id="loan-form"
-          className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-sm mt-12 lg:mt-0 lg:ml-24"
+          className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-md lg:max-w-[28rem] mt-12 lg:mt-0 lg:ml-24"
         >
           <form onSubmit={handleSubmit} className="space-y-4">
             <h2 className="text-2xl font-bold text-center">Get Instant Loan</h2>
@@ -197,7 +199,7 @@ export default function MainSection() {
             {/* Phone */}
             <div>
               <label className="block text-sm font-medium mb-1">
-                Mobile Number <span className="text-red-500">*</span>
+                Phone Number <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -213,46 +215,12 @@ export default function MainSection() {
                   required
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  Must be registered with Aadhaar
+                  Enter your mobile number
                 </p>
               </div>
             </div>
 
-            {/* Salary */}
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Monthly Salary (₹) <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="number"
-                  name="salary"
-                  placeholder="Enter your salary"
-                  min={35000}
-                  max={10000000}
-                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                  value={formData.salary}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setFormData({ ...formData, salary: value });
-                  }}
-                  onBlur={(e) => {
-                    const value = Number(e.target.value);
-                    if (value > 0 && value < 35000) {
-                      toast.error("❌ Salary must be at least ₹35,000");
-                      setFormData({ ...formData, salary: "" });
-                    }
-                  }}
-                  required
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Minimum salary should be ₹35,000
-                </p>
-              </div>
-            </div>
-
-            {/* City */}
+             {/* City */}
             <div>
               <label className="block text-sm font-medium mb-1">
                 City <span className="text-red-500">*</span>
@@ -279,6 +247,45 @@ export default function MainSection() {
                 </select>
               </div>
             </div>
+
+           {/* Salary */}
+<div>
+  <label className="block text-sm font-medium mb-1">
+    Monthly Salary (₹) <span className="text-red-500">*</span>
+  </label>
+  <div className="relative">
+    <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+
+    <input
+      type="number"
+      name="salary"
+      placeholder="Enter your salary"
+      min={formData.city === "Mumbai" ? 50000 : 35000}   // 👈 dynamic min
+      max={10000000}
+      className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+      value={formData.salary}
+      onChange={(e) => {
+        const value = e.target.value;
+        setFormData({ ...formData, salary: value });
+      }}
+      onBlur={(e) => {
+        const value = Number(e.target.value);
+        const minSalary = formData.city === "Mumbai" ? 50000 : 35000;
+
+        if (value > 0 && value < minSalary) {
+          toast.error(`❌ Salary must be at least ₹${minSalary.toLocaleString()}`);
+          setFormData({ ...formData, salary: "" });
+        }
+      }}
+      required
+    />
+
+    <p className="text-xs text-gray-500 mt-1">
+      Minimum salary should be ₹
+      {formData.city === "Mumbai" ? "50,000" : "35,000"}
+    </p>
+  </div>
+</div>
 
             {/* Loan Amount */}
             <div>
