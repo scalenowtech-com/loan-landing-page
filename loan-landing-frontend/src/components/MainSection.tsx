@@ -186,7 +186,8 @@ export default function MainSection() {
                   type="text"
                   name="name"
                   placeholder="Enter your full name"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
+           focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -202,14 +203,15 @@ export default function MainSection() {
                 Phone Number <span className="text-red-500">*</span>
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Phone className="absolute left-3 top-2/5 -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="tel"
                   name="phone"
                   pattern="[0-9]{10}"
                   maxLength={10}
                   placeholder="10-digit mobile number"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
+           focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
                   value={formData.phone}
                   onChange={handleChange}
                   required
@@ -229,7 +231,8 @@ export default function MainSection() {
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                 <select
                   name="city"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
+           focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
                   value={formData.city}
                   onChange={handleChange}
                   required
@@ -255,14 +258,14 @@ export default function MainSection() {
   </label>
   <div className="relative">
     <Wallet className="absolute left-3 top-2/5 -translate-y-1/2 text-gray-400 w-5 h-5" />
-
     <input
       type="number"
       name="salary"
       placeholder="Enter your salary"
       min={formData.city === "Mumbai" ? 50000 : 35000}   // 👈 dynamic min
       max={10000000}
-      className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+      className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
+           focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
       value={formData.salary}
       onChange={(e) => {
         const value = e.target.value;
@@ -296,7 +299,8 @@ export default function MainSection() {
                 <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                 <select
                   name="loanAmount"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
+           focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
                   value={formData.loanAmount}
                   onChange={handleChange}
                   required
@@ -325,7 +329,8 @@ export default function MainSection() {
                 <BarChart className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                 <select
                   name="cibil"
-                  className="w-full border rounded-lg p-3 pl-10 outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
+           focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
                   value={formData.cibil}
                   onChange={handleChange}
                 >
