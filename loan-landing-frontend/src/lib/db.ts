@@ -12,11 +12,10 @@ interface MongooseCache {
   promise: Promise<Mongoose> | null;
 }
 
-// ✅ Use global type declaration for Next.js hot reload safety
+// ✅ Global type declaration for Next.js hot reload safety
 declare global {
   // Allow global `mongoose` caching in Node.js runtime
   // (avoids TS complaints + OverwriteModelError on hot reloads)
-  // eslint-disable-next-line no-var
   var mongooseCache: MongooseCache | undefined;
 }
 

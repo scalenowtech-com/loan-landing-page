@@ -1,3 +1,4 @@
+// app/api/users/route.ts
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import User from "@/models/User";
@@ -37,9 +38,16 @@ export async function POST(req: Request) {
       { message: "User data saved successfully!", user: savedUser },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : typeof error === "string"
+        ? error
+        : "Unknown error";
+
     return NextResponse.json(
-      { message: "Error saving user", error: error.message || error },
+      { message: "Error saving user", error: errorMessage },
       { status: 500 }
     );
   }
