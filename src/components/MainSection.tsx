@@ -77,10 +77,8 @@ export default function MainSection() {
     setLoading(true);
 
     try {
-      const API_BASE_URL =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-      const res = await axios.post(`${API_BASE_URL}/api/users`, formData);
+      const res = await axios.post("/api/users", formData);
 
       if (res.status === 201) {
         toast.success("✅ Loan application submitted successfully!");
