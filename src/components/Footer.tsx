@@ -93,7 +93,6 @@ export default function Footer() {
           © {new Date().getFullYear()} LoanInNeed. All rights reserved. | A Unit
           of Sashi Enterprises Ltd.
         </div>
-        {/* sayan */}
       </footer>
     </>
   );
