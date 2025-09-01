@@ -2,13 +2,50 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import User from "@/models/User";
+import { google } from "googleapis";
 
-// Simple GET for testing
-export async function GET() {
-  return NextResponse.json({ message: "Users API working ✅" });
+// Save data to Google Sheets
+async function saveToGoogleSheet(data: {
+  name: string;
+  phone: string;
+  city: string;
+  loanAmount: string;
+  cibil?: string;
+  salary: number;
+}) {
+  const auth = new google.auth.JWT({
+    email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
+    key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, "\n"), // 🔑 fix newlines
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+  const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID!;
+
+  // ⚠️ Update "Sheet1" to your actual tab name
+  const range = "Sheet!A:G";
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range,
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [
+        [
+          data.name,
+          data.phone,
+          data.city,
+          data.loanAmount,
+          data.cibil || "",
+          data.salary,
+          new Date().toLocaleString("en-IN"),
+        ],
+      ],
+    },
+  });
 }
 
-// POST /api/users → Save form data
+// ✅ POST /api/users
 export async function POST(req: Request) {
   try {
     await connectDB();
@@ -23,6 +60,7 @@ export async function POST(req: Request) {
       );
     }
 
+    // Save to MongoDB
     const newUser = new User({
       name: name.trim(),
       phone: phone.trim(),
@@ -34,11 +72,23 @@ export async function POST(req: Request) {
 
     const savedUser = await newUser.save();
 
+    // Save to Google Sheets (non-blocking)
+    await saveToGoogleSheet({
+      name: savedUser.name,
+      phone: savedUser.phone,
+      city: savedUser.city,
+      loanAmount: savedUser.loanAmount,
+      cibil: savedUser.cibil,
+      salary: savedUser.salary,
+    });
+
     return NextResponse.json(
       { message: "User data saved successfully!", user: savedUser },
       { status: 201 }
     );
   } catch (error: unknown) {
+    console.error("❌ Error saving user:", error);
+
     const errorMessage =
       error instanceof Error
         ? error.message
