@@ -27,17 +27,15 @@ export default function Navbar() {
             width={150} 
             height={30} 
             priority 
-            style={{ 
-              width: '150px', 
-              height: 'auto' 
-            }}
+            style={{ width: "150px", height: "auto" }}
           />
         </Link>
 
         {/* Desktop Nav Links */}
         <div className="hidden md:flex space-x-8">
+          {/* About → Footer */}
           <ScrollLink
-            to="about"
+            to="footer"
             smooth={true}
             duration={500}
             offset={-70}
@@ -46,19 +44,24 @@ export default function Navbar() {
             About
           </ScrollLink>
           
-          <Link href="/services" className="text-gray-700 hover:text-red-600 font-medium">
-            Services
-          </Link>
-          
+          {/* Services → About */}
           <ScrollLink
-            to="contact"
+            to="about"
             smooth={true}
             duration={500}
             offset={-70}
             className="cursor-pointer text-gray-700 hover:text-red-600 font-medium"
           >
-            Contact
+            Services
           </ScrollLink>
+          
+          {/* Contact → Call */}
+          <a
+            href="tel:9266328731"
+            className="text-gray-700 hover:text-red-600 font-medium"
+          >
+            Contact
+          </a>
           
           <button
             onClick={handleTrackLoan}
@@ -84,8 +87,9 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white shadow-lg px-6 py-4 space-y-4">
+          {/* About → Footer */}
           <ScrollLink
-            to="about"
+            to="footer"
             smooth={true}
             duration={500}
             offset={-70}
@@ -95,24 +99,26 @@ export default function Navbar() {
             About
           </ScrollLink>
           
-          <Link
-            href="/services"
-            className="block text-gray-700 hover:text-red-600 font-medium"
-            onClick={() => setMenuOpen(false)}
-          >
-            Services
-          </Link>
-          
+          {/* Services → About */}
           <ScrollLink
-            to="contact"
+            to="about"
             smooth={true}
             duration={500}
             offset={-70}
             onClick={() => setMenuOpen(false)}
             className="block cursor-pointer text-gray-700 hover:text-red-600 font-medium"
           >
-            Contact
+            Services
           </ScrollLink>
+          
+          {/* Contact → Call */}
+          <a
+            href="tel:9266328731"
+            onClick={() => setMenuOpen(false)}
+            className="block text-gray-700 hover:text-red-600 font-medium"
+          >
+            Contact
+          </a>
           
           <button
             onClick={handleTrackLoan}
