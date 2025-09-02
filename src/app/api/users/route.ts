@@ -22,8 +22,26 @@ async function saveToGoogleSheet(data: {
   const sheets = google.sheets({ version: "v4", auth });
   const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID!;
 
-  // ⚠️ Update "Sheet1" to your actual tab name
-  const range = "Sheet!A:G";
+  
+  // Get the whole E:K range (or a big chunk, like E11:K1000)
+const getResponse = await sheets.spreadsheets.values.get({
+  spreadsheetId,
+  range: "'Live Leads'!E11:K1000",
+});
+
+const rows = getResponse.data.values || [];
+
+// Find the last non-empty row
+let lastRow = 10; // because we start from row 11
+for (let i = rows.length - 1; i >= 0; i--) {
+  if (rows[i].some(cell => cell !== "")) {
+    lastRow = 11 + i; // row number of last filled row
+    break;
+  }
+}
+
+const nextRow = lastRow + 1;
+const range = `'Live Leads'!E${nextRow}:K${nextRow}`;
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
