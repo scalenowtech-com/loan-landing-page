@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Loan Landing Page",
   description: "Get Instant Loan Approval",
+  icons: {
+    icon: "/logo1.png", 
+  },
 };
 
 export default function RootLayout({
