@@ -130,9 +130,10 @@ export default function MainSection() {
         <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-10 px-6">
           {/* Left Content */}
           <div className="max-w-xl pl-6 lg:pl-2 text-white mt-0 lg:mt-[-400px]">
-            <p className="text-red-400 font-semibold underline underline-offset-8">
-              Instant Loan Approval
-            </p>
+            <p className="text-xl text-red-400 font-bold underline underline-offset-8 mb-4">
+  Instant Loan Approval
+</p>
+
             <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold lg:font-semibold leading-tight mt-2">
               Get Emergency Loan in{" "}
               <span className="text-red-400">30 Minutes</span>
@@ -145,7 +146,7 @@ export default function MainSection() {
                 Apply Now - Get ₹50,000
               </div>
               <div className="text-lg border border-white px-8 py-3 rounded-full text-center flex items-center justify-center gap-2">
-                <Phone className="w-5 h-5" />
+                <Phone className="w-5 h-5" strokeWidth={3} />
                 Call: 9266328731
               </div>
             </div>
@@ -172,29 +173,31 @@ export default function MainSection() {
       <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-10 px-6">
         {/* Left Content */}
         <div className="max-w-xl pl-6 lg:pl-2 text-white mt-0 lg:mt-[-400px]">
-          <p className="text-red-400 font-semibold underline underline-offset-8">
+          <p className="text-red-500 font-semibold underline underline-offset-8">
             Instant Loan Approval
           </p>
           <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold lg:font-semibold leading-tight mt-2">
             Get Emergency Loan in{" "}
             <span className="text-red-400">30 Minutes</span>
           </h1>
-          <p className="mt-4 text-xl text-gray-200">
-            Quick, secure, and hassle-free loans for all your urgent financial needs. No lengthy paperwork, instant approval.
+          <p className="mt-4 text-xl text-gray-100">
+            Quick, secure, and hassle-free loans for all your urgent financial needs. Paperless, instant approval.
           </p>
-          <div className="mt-6 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+          <div className="mt-10 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
             <button
               onClick={handleScrollToForm}
               className="text-lg bg-red-600 px-8 py-3 rounded-full text-white font-semibold hover:bg-red-700 transition-colors cursor-pointer"
             >
-              Apply Now - Get ₹50,000
+              Minimum Salary ₹35,000  
+              <p className="break-normal">Apply Now</p>
             </button>
             <a
               href="tel:9266328731"
-              className="text-lg border border-white px-8 py-3 rounded-full hover:bg-white hover:text-gray-800 transition-colors text-center flex items-center justify-center gap-2"
+              className="text-lg border border-white px-6 py-3 rounded-full hover:bg-white hover:text-gray-800 transition-colors text-center flex items-center justify-center gap-2"
             >
-              <Phone className="w-5 h-5" />
-              Call: 9266328731
+              <strong><Phone className="w-8 h-5 font-bold text-xl" /></strong>
+              Call: 
+              <span>9266328731</span>
             </a>
           </div>
         </div>
