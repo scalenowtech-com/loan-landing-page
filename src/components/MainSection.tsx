@@ -130,8 +130,9 @@ export default function MainSection() {
         <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-10 px-6">
           {/* Left Content */}
           <div className="max-w-xl pl-6 lg:pl-2 text-white mt-0 lg:mt-[-400px]">
+            {console.log("✅ Latest code loaded")}
             <p className="text-xl text-red-600 font-bold underline underline-offset-8 mb-4">
-  Instant Loan Approval   ---weeeeee
+  Instant Loan Approval   ---weeeeeessss
 </p>
 
             <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold lg:font-semibold leading-tight mt-2">
