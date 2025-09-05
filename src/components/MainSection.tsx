@@ -130,8 +130,8 @@ export default function MainSection() {
         <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-10 px-6">
           {/* Left Content */}
           <div className="max-w-xl pl-6 lg:pl-2 text-white mt-0 lg:mt-[-400px]">
-            <p className="text-xl text-red-400 font-bold underline underline-offset-8 mb-4">
-  Instant Loan Approval
+            <p className="text-xl text-red-600 font-bold underline underline-offset-8 mb-4">
+  Instant Loan Approval   ---weeeeee
 </p>
 
             <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold lg:font-semibold leading-tight mt-2">
@@ -311,7 +311,11 @@ export default function MainSection() {
                   type="number"
                   name="salary"
                   placeholder="Enter your salary"
-                  min={formData.city === "Mumbai" ? 50000 : 35000}
+                  min={
+formData.city === "Mumbai" || formData.city === "Bangalore"
+    ? 50000
+    : 35000
+}
                   max={10000000}
                   className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
            focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
