@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +17,6 @@ import { useRouter } from "next/navigation";
 
 export default function MainSection() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -30,11 +29,6 @@ export default function MainSection() {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [agree, setAgree] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -77,7 +71,6 @@ export default function MainSection() {
     setLoading(true);
 
     try {
-
       const res = await axios.post("/api/users", formData);
 
       if (res.status === 201) {
@@ -123,50 +116,6 @@ export default function MainSection() {
       formSection?.scrollIntoView({ behavior: "smooth" });
     }, 800);
   };
-
-  if (!mounted) {
-    return (
-      <section className="bg-[url('/bg.jpg')] bg-cover bg-center py-20">
-        <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-start gap-x-10 px-6">
-          {/* Left Content */}
-          <div className="max-w-xl pl-6 lg:pl-2 text-white mt-0 lg:mt-[-400px]">
-            <p className="text-xl text-red-600 font-bold underline underline-offset-8 mb-4">
-  Instant Loan Approval   ---weeeeeessss
-</p>
-
-            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold lg:font-semibold leading-tight mt-2">
-              Get Emergency Loan in{" "}
-              <span className="text-red-400">30 Minutes</span>
-            </h1>
-            <p className="mt-4 text-xl text-gray-200">
-              Quick, secure, and hassle-free loans for all your urgent financial needs. No lengthy paperwork, instant approval.
-            </p>
-            <div className="mt-6 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-              <div className="text-lg bg-red-600 px-8 py-3 rounded-full text-white font-semibold">
-                Apply Now - Get ₹50,000
-              </div>
-              <div className="text-lg border border-white px-8 py-3 rounded-full text-center flex items-center justify-center gap-2">
-                <Phone className="w-5 h-5" strokeWidth={3} />
-                Call: 9266328731
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-md lg:max-w-[28rem] mt-12 lg:mt-0 lg:ml-24">
-            <div className="animate-pulse">
-              <div className="h-6 bg-gray-200 rounded mb-4"></div>
-              <div className="space-y-4">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="h-12 bg-gray-200 rounded"></div>
-                ))}
-                <div className="h-12 bg-gray-200 rounded"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="bg-[url('/bg.jpg')] bg-cover bg-center py-20">
@@ -311,12 +260,7 @@ export default function MainSection() {
                   type="number"
                   name="salary"
                   placeholder="Enter your salary"
-                  min={
-formData.city === "Mumbai" || formData.city === "Bangalore"
-    ? 50000
-    : 35000
-}
-                  max={10000000}
+                  min={formData.city === "Mumbai" || formData.city === "Bangalore" ? "50000" : "35000"}max="10000000"
                   className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
            focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
                   value={formData.salary}
@@ -326,7 +270,7 @@ formData.city === "Mumbai" || formData.city === "Bangalore"
                   }}
                   onBlur={(e) => {
                     const value = Number(e.target.value);
-                    const minSalary = formData.city === "Mumbai" ? 50000 : 35000;
+                    const minSalary = (formData.city === "Mumbai" || formData.city === "Bangalore") ? 50000 : 35000;
 
                     if (value > 0 && value < minSalary) {
                       toast.error(`❌ Salary must be at least ₹${minSalary.toLocaleString()}`);
@@ -339,7 +283,9 @@ formData.city === "Mumbai" || formData.city === "Bangalore"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Minimum salary should be ₹
-                  {formData.city === "Mumbai" ? "50,000" : "35,000"}
+                  {formData.city === "Mumbai" || formData.city === "Bangalore"
+        ? "50,000"
+        : "35,000"}
                 </p>
               </div>
             </div>
