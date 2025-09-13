@@ -26,7 +26,7 @@ async function saveToGoogleSheet(data: {
   // Get the whole E:K range (or a big chunk, like E11:K1000)
 const getResponse = await sheets.spreadsheets.values.get({
   spreadsheetId,
-  range: "'Live Leads'!E11:K1000",
+  range: "'Google Leads'!E11:K50000",
 });
 
 const rows = getResponse.data.values || [];
