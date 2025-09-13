@@ -41,7 +41,7 @@ for (let i = rows.length - 1; i >= 0; i--) {
 }
 
 const nextRow = lastRow + 1;
-const range = `'Live Leads'!E${nextRow}:K${nextRow}`;
+const range = `'Google Leads'!E${nextRow}:K${nextRow}`;
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
