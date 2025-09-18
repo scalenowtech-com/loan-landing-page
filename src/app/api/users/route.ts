@@ -11,7 +11,7 @@ async function saveToGoogleSheet(data: {
   city: string;
   loanAmount: string;
   cibil?: string;
-  salary: number;
+  salary: string;
 }) {
   const auth = new google.auth.JWT({
     email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -56,7 +56,8 @@ const range = `'Google Leads'!E${nextRow}:K${nextRow}`;
           data.loanAmount,
           data.cibil || "",
           data.salary,
-          new Date().toLocaleString("en-IN"),
+          new Date().toISOString().replace("T", " ").replace("Z", ""),
+          // new Date().toLocaleString("en-IN")
         ],
       ],
     },
@@ -82,7 +83,7 @@ export async function POST(req: Request) {
     const newUser = new User({
       name: name.trim(),
       phone: phone.trim(),
-      salary: Number(salary),
+      salary: salary.toString().trim(),
       city: city.trim(),
       loanAmount: loanAmount.toString().trim(),
       cibil: cibil ? cibil.toString().trim() : undefined,

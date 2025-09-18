@@ -137,8 +137,7 @@ export default function MainSection() {
               onClick={handleScrollToForm}
               className="text-lg bg-red-600 px-8 py-3 rounded-full text-white font-semibold hover:bg-red-700 transition-colors cursor-pointer"
             >
-              Minimum Salary ₹35,000  
-              <p className="break-normal">Apply Now</p>
+              Apply Now
             </button>
             <a
               href="tel:9266328731"
@@ -239,56 +238,41 @@ export default function MainSection() {
                   <option value="Ahmedabad">Ahmedabad</option>
                   <option value="Bangalore">Bangalore</option>
                   <option value="Chennai">Chennai</option>
-                  <option value="Delhi/NCR">Delhi/NCR</option>
+                  <option value="Delhi/NCR">Delhi</option>
                   <option value="Hyderabad">Hyderabad</option>
                   <option value="Kolkata">Kolkata</option>
                   <option value="Mumbai">Mumbai</option>
-                  <option value="New Delhi (HO)">New Delhi (HO)</option>
                   <option value="Pune">Pune</option>
                 </select>
               </div>
             </div>
 
            {/* Salary */}
-            <div>
-              <label className="block text-sm font-medium mb-1">
-                Monthly Salary (₹) <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <Wallet className="absolute left-3 top-2/5 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="number"
-                  name="salary"
-                  placeholder="Enter your salary"
-                  min={formData.city === "Mumbai" || formData.city === "Bangalore" ? "50000" : "35000"}max="10000000"
-                  className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none 
-           focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
-                  value={formData.salary}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setFormData({ ...formData, salary: value });
-                  }}
-                  onBlur={(e) => {
-                    const value = Number(e.target.value);
-                    const minSalary = (formData.city === "Mumbai" || formData.city === "Bangalore") ? 50000 : 35000;
-
-                    if (value > 0 && value < minSalary) {
-                      toast.error(`❌ Salary must be at least ₹${minSalary.toLocaleString()}`);
-                      setFormData({ ...formData, salary: "" });
-                    }
-                  }}
-                  required
-                  autoComplete="off"
-                  data-form-type="salary"
-                />
-                <p className="text-xs text-gray-500 mt-1">
-                  Minimum salary should be ₹
-                  {formData.city === "Mumbai" || formData.city === "Bangalore"
-        ? "50,000"
-        : "35,000"}
-                </p>
-              </div>
-            </div>
+<div>
+  <label className="block text-sm font-medium mb-1">
+    Monthly Salary (₹) <span className="text-red-500">*</span>
+  </label>
+  <div className="relative">
+    <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+    <select
+      name="salary"
+      className="w-full border border-gray-400 rounded-lg p-3 pl-10 outline-none
+        focus:border-2 focus:border-black focus:ring-1 focus:ring-red-400 focus:ring-offset-0"
+      value={formData.salary}
+      onChange={handleChange}
+      required
+      data-form-type="salary"
+    >
+      <option value="">Select salary range</option>
+      <option value="20,000 - 30,000">₹20,000 - ₹30,000</option>
+      <option value="31,000 - 40,000">₹31,000 - ₹40,000</option>
+      <option value="41,000 - 50,000">₹41,000 - ₹50,000</option>
+      <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
+      <option value="75,000 - 1,00,000">₹75,000 - ₹1,00,000</option>
+      <option value="1,00,000+">₹1,00,000 and above</option>
+    </select>
+  </div>
+</div>
 
             {/* Loan Amount */}
             <div>

@@ -4,7 +4,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 export interface IUser extends Document {
   name: string;
   phone: string;
-  salary: number;
+  salary: string;
   city: string;
   loanAmount: string;
   cibil?: string;
@@ -14,8 +14,8 @@ export interface IUser extends Document {
 // ✅ Define schema
 const userSchema: Schema<IUser> = new Schema({
   name: { type: String, required: true, trim: true },
-  phone: { type: String, required: true, trim: true }, // 🔑 add unique: true if needed
-  salary: { type: Number, required: true },
+  phone: { type: String, required: true, trim: true }, 
+  salary: { type: String, required: true },
   city: { type: String, required: true, trim: true },
   loanAmount: { type: String, required: true, trim: true },
   cibil: { type: String, trim: true },
