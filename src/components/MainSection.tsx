@@ -243,6 +243,8 @@ export default function MainSection() {
                   <option value="Kolkata">Kolkata</option>
                   <option value="Mumbai">Mumbai</option>
                   <option value="Pune">Pune</option>
+                  <option value="Pune">Jaipur</option>
+                  <option value="Pune">Surat</option>
                 </select>
               </div>
             </div>
