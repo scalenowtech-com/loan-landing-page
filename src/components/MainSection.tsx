@@ -243,14 +243,15 @@ export default function MainSection() {
                   <option value="Kolkata">Kolkata</option>
                   <option value="Mumbai">Mumbai</option>
                   <option value="Pune">Pune</option>
-                  <option value="Pune">Jaipur</option>
-                  <option value="Pune">Surat</option>
+                  <option value="Jaupur">Jaipur</option>
+                  <option value="Surat">Surat</option>
                 </select>
               </div>
             </div>
 
+
            {/* Salary */}
-<div>
+<div className="mb-1.5">
   <label className="block text-sm font-medium mb-1">
     Monthly Salary (₹) <span className="text-red-500">*</span>
   </label>
@@ -266,13 +267,22 @@ export default function MainSection() {
       data-form-type="salary"
     >
       <option value="">Select salary range</option>
-      <option value="20,000 - 30,000">₹20,000 - ₹30,000</option>
-      <option value="31,000 - 40,000">₹31,000 - ₹40,000</option>
-      <option value="41,000 - 50,000">₹41,000 - ₹50,000</option>
-      <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
-      <option value="75,000 - 1,00,000">₹75,000 - ₹1,00,000</option>
+
+  {["Mumbai", "Delhi/NCR", "Bangalore", "Hyderabad"].includes(formData.city) ? (
+    <>
+      <option value="31,000 - 40,000">₹51,000 - ₹75,000</option>
+      <option value="75,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
       <option value="1,00,000+">₹1,00,000 and above</option>
-    </select>
+    </>
+  ) : (
+    <>
+      <option value="20,000 - 30,000">₹35,000 - ₹50,000</option>
+      <option value="31,000 - 40,000">₹51,000 - ₹75,000</option>
+      <option value="75,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
+      <option value="1,00,000+">₹1,00,000 and above</option>
+    </>
+  )}
+</select>
   </div>
 </div>
 
