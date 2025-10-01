@@ -270,15 +270,15 @@ export default function MainSection() {
 
   {["Mumbai", "Delhi/NCR", "Bangalore", "Hyderabad"].includes(formData.city) ? (
     <>
-      <option value="31,000 - 40,000">₹51,000 - ₹75,000</option>
-      <option value="75,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
+      <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
+      <option value="76,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
       <option value="1,00,000+">₹1,00,000 and above</option>
     </>
   ) : (
     <>
-      <option value="20,000 - 30,000">₹35,000 - ₹50,000</option>
-      <option value="31,000 - 40,000">₹51,000 - ₹75,000</option>
-      <option value="75,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
+      <option value="35,000 - 50,000">₹35,000 - ₹50,000</option>
+      <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
+      <option value="76,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
       <option value="1,00,000+">₹1,00,000 and above</option>
     </>
   )}
