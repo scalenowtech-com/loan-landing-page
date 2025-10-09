@@ -12,6 +12,7 @@ async function saveToGoogleSheet(data: {
   loanAmount: string;
   cibil?: string;
   salary: string;
+  gclid?: string;
 }) {
   const auth = new google.auth.JWT({
     email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
@@ -26,7 +27,7 @@ async function saveToGoogleSheet(data: {
   // Get the whole E:K range (or a big chunk, like E11:K1000)
 const getResponse = await sheets.spreadsheets.values.get({
   spreadsheetId,
-  range: "'Google Leads'!E11:K50000",
+  range: "'Google Leads'!E11:L50000",
 });
 
 const rows = getResponse.data.values || [];
@@ -41,7 +42,7 @@ for (let i = rows.length - 1; i >= 0; i--) {
 }
 
 const nextRow = lastRow + 1;
-const range = `'Google Leads'!E${nextRow}:K${nextRow}`;
+const range = `'Google Leads'!E${nextRow}:L${nextRow}`;
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
@@ -56,8 +57,8 @@ const range = `'Google Leads'!E${nextRow}:K${nextRow}`;
           data.loanAmount,
           data.cibil || "",
           data.salary,
+          data.gclid || "",
           new Date().toISOString().replace("T", " ").replace("Z", ""),
-          // new Date().toLocaleString("en-IN")
         ],
       ],
     },
@@ -70,7 +71,7 @@ export async function POST(req: Request) {
     await connectDB();
     const body = await req.json();
 
-    const { name, phone, city, loanAmount, cibil, salary } = body;
+    const { name, phone, city, loanAmount, cibil, salary, gclid } = body;
 
     if (!name || !phone || !city || !loanAmount || !salary) {
       return NextResponse.json(
@@ -87,6 +88,7 @@ export async function POST(req: Request) {
       city: city.trim(),
       loanAmount: loanAmount.toString().trim(),
       cibil: cibil ? cibil.toString().trim() : undefined,
+      gclid: gclid ? gclid.trim() : undefined,
     });
 
     const savedUser = await newUser.save();
@@ -99,6 +101,7 @@ export async function POST(req: Request) {
       loanAmount: savedUser.loanAmount,
       cibil: savedUser.cibil,
       salary: savedUser.salary,
+      gclid: body.gclid,
     });
 
     return NextResponse.json(

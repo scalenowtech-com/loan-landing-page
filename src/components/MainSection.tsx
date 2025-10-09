@@ -14,8 +14,13 @@ import {
   Wallet
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+
 
 export default function MainSection() {
+  
+  const searchParams = useSearchParams();
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
@@ -24,7 +29,18 @@ export default function MainSection() {
     city: "",
     loanAmount: "",
     cibil: "",
+    gclid: ""
   });
+
+
+
+useEffect(() => {
+    const gclid = searchParams.get("gclid");
+    if (gclid) {
+      setFormData((prev) => ({ ...prev, gclid })); // add gclid to formData
+      console.log("Captured gclid:", gclid);
+    }
+  }, [searchParams]);
 
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -82,6 +98,7 @@ export default function MainSection() {
           city: "",
           loanAmount: "",
           cibil: "",
+          gclid: ""
         });
         setTimeout(() => {
           router.push("/thank-you");
@@ -116,6 +133,8 @@ export default function MainSection() {
       formSection?.scrollIntoView({ behavior: "smooth" });
     }, 800);
   };
+
+
 
   return (
     <section className="bg-[url('/bg.jpg')] bg-cover bg-center py-20">
@@ -268,7 +287,7 @@ export default function MainSection() {
     >
       <option value="">Select salary range</option>
 
-  {["Mumbai", "Delhi/NCR", "Bangalore", "Hyderabad"].includes(formData.city) ? (
+  {["Mumbai", "Delhi/NCR", "Bangalore", "Hyderabad", "Chennai"].includes(formData.city) ? (
     <>
       <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
       <option value="76,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
