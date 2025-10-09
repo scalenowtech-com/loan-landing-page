@@ -1,6 +1,9 @@
 
+
 import MainSection from "@/components/MainSection";
 import About from "@/components/About";
+
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
