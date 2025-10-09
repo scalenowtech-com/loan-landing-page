@@ -1,4 +1,3 @@
-"use client";
 
 import MainSection from "@/components/MainSection";
 import About from "@/components/About";
