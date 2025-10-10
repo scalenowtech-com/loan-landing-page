@@ -275,6 +275,15 @@ useEffect(() => {
   <label className="block text-sm font-medium mb-1">
     Monthly Salary (₹) <span className="text-red-500">*</span>
   </label>
+
+  {/* Minimum Salary Note */}
+  <p className="text-xs text-gray-500 mb-1">
+    Minimum required salary:{" "}
+    {["Mumbai", "Delhi/NCR", "Bangalore", "Hyderabad", "Chennai"].includes(formData.city)
+      ? "₹51,000"
+      : "₹35,000"}
+  </p>
+
   <div className="relative">
     <Wallet className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
     <select
@@ -288,23 +297,24 @@ useEffect(() => {
     >
       <option value="">Select salary range</option>
 
-  {["Mumbai", "Delhi/NCR", "Bangalore", "Hyderabad", "Chennai"].includes(formData.city) ? (
-    <>
-      <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
-      <option value="76,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
-      <option value="1,00,000+">₹1,00,000 and above</option>
-    </>
-  ) : (
-    <>
-      <option value="35,000 - 50,000">₹35,000 - ₹50,000</option>
-      <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
-      <option value="76,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
-      <option value="1,00,000+">₹1,00,000 and above</option>
-    </>
-  )}
-</select>
+      {["Mumbai", "Delhi/NCR", "Bangalore", "Hyderabad", "Chennai"].includes(formData.city) ? (
+        <>
+          <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
+          <option value="76,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
+          <option value="1,00,000+">₹1,00,000 and above</option>
+        </>
+      ) : (
+        <>
+          <option value="35,000 - 50,000">₹35,000 - ₹50,000</option>
+          <option value="51,000 - 75,000">₹51,000 - ₹75,000</option>
+          <option value="76,000 - 1,00,000">₹76,000 - ₹1,00,000</option>
+          <option value="1,00,000+">₹1,00,000 and above</option>
+        </>
+      )}
+    </select>
   </div>
 </div>
+
 
             {/* Loan Amount */}
             <div>
