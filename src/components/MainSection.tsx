@@ -264,6 +264,7 @@ useEffect(() => {
                   <option value="Pune">Pune</option>
                   <option value="Jaipur">Jaipur</option>
                   <option value="Surat">Surat</option>
+                  <option value="Bhopal">Bhopal</option>
                 </select>
               </div>
             </div>

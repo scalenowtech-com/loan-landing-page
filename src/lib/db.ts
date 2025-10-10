@@ -12,10 +12,7 @@ interface MongooseCache {
   promise: Promise<Mongoose> | null;
 }
 
-// ✅ Global type declaration for Next.js hot reload safety
 declare global {
-  // Allow global `mongoose` caching in Node.js runtime
-  // (avoids TS complaints + OverwriteModelError on hot reloads)
   var mongooseCache: MongooseCache | undefined;
 }
 
@@ -38,7 +35,7 @@ export async function connectDB(): Promise<Mongoose> {
   }
 
   cached.conn = await cached.promise;
-  global.mongooseCache = cached; // ✅ persist cache globally
+  global.mongooseCache = cached; 
 
   return cached.conn;
 }
