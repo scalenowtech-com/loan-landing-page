@@ -16,7 +16,7 @@ async function saveToGoogleSheet(data: {
 }) {
   const auth = new google.auth.JWT({
     email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-    key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, "\n"), // 🔑 fix newlines
+    key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, "\n"), 
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
@@ -24,25 +24,23 @@ async function saveToGoogleSheet(data: {
   const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID!;
 
   
-  // Get the whole E:K range (or a big chunk, like E11:K1000)
 const getResponse = await sheets.spreadsheets.values.get({
   spreadsheetId,
-  range: "'Google Leads'!E11:L50000",
+  range: "'Google Leads November'!D2:K50000",
 });
 
 const rows = getResponse.data.values || [];
 
-// Find the last non-empty row
-let lastRow = 10; // because we start from row 11
+let lastRow = 1; 
 for (let i = rows.length - 1; i >= 0; i--) {
   if (rows[i].some(cell => cell !== "")) {
-    lastRow = 11 + i; // row number of last filled row
+    lastRow = 2 + i; 
     break;
   }
 }
 
 const nextRow = lastRow + 1;
-const range = `'Google Leads'!E${nextRow}:L${nextRow}`;
+const range = `'Google Leads November'!D${nextRow}:K${nextRow}`;
 
   await sheets.spreadsheets.values.append({
     spreadsheetId,
